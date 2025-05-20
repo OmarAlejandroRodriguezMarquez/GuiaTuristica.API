@@ -1,4 +1,5 @@
 using GuiaTuristica.API.Data;
+using GuiaTuristica.API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,9 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString
         ("DefaultConnection")));
+
+builder.Services.AddScoped<ICatalogoService, CatalogoService>();
+builder.Services.AddScoped<ILugarService, LugarService>();
 
 var app = builder.Build();
 
